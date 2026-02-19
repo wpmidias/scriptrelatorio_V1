@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gerador de Script - Relatório</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>GERADOR DE SCRIPT</h1>
+
+      <label>Cliente</label>
+      <select id="cliente">
+        <option>Carregando...</option>
+      </select>
+
+      <label>Data Início</label>
+      <input id="dataInicio" type="date" />
+
+      <label>Data Fim</label>
+      <input id="dataFim" type="date" />
+
+      <button id="btnGerar">GERAR SCRIPT</button>
+
+      <textarea id="saida" rows="6" readonly></textarea>
+
+      <button id="btnCopiar" class="secondary">COPIAR</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
