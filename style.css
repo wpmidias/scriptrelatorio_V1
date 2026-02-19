@@ -1,10 +1,147 @@
+:root{
+  --bg1:#071a22;
+  --bg2:#0b2a34;
+  --card:#0f141a;
+  --stroke:rgba(255,255,255,.10);
+  --txt:#e8f5f2;
+  --muted:#7eead6;
+
+  --g1:#00f0b0;
+  --g2:#0aa9ff;
+  --g3:#ff3d7f;
+  --g4:#ffb703;
+}
+
 *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b2430;padding:24px}
-.wrap{width:100%;max-width:520px}
-.card{background:#0f141a;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px;box-shadow:0 0 0 6px rgba(0,255,170,.10)}
-h1{margin:0 0 18px;color:#00f0b0;letter-spacing:1px;text-align:center}
-label{display:block;margin:12px 0 6px;color:#7eead6;font-weight:600}
-select,input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.10);background:#1a222c;color:#e8f5f2}
-button{width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:linear-gradient(90deg,#00f0b0,#0aa9ff);color:#061017;font-weight:800;cursor:pointer}
-button.secondary{background:#222c37;color:#e8f5f2;border:1px solid rgba(255,255,255,.10)}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  color:var(--txt);
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(0,240,176,.18), transparent 55%),
+    radial-gradient(900px 500px at 80% 20%, rgba(10,169,255,.18), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+}
+
+.wrap{width:100%;max-width:560px}
+
+.card{
+  background:rgba(15,20,26,.92);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.35),
+    0 0 0 6px rgba(0,240,176,.08);
+  backdrop-filter: blur(10px);
+}
+
+h1{
+  margin:0 0 18px;
+  letter-spacing:1px;
+  text-align:center;
+  font-weight:900;
+  background: linear-gradient(90deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+label{
+  display:block;
+  margin:12px 0 6px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+select,input,textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--stroke);
+  background:rgba(26,34,44,.85);
+  color:var(--txt);
+  outline:none;
+  transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+select:hover,input:hover,textarea:hover{
+  border-color: rgba(126,234,214,.45);
+}
+
+select:focus,input:focus,textarea:focus{
+  border-color: rgba(0,240,176,.65);
+  box-shadow: 0 0 0 4px rgba(0,240,176,.12);
+  transform: translateY(-1px);
+}
+
 textarea{margin-top:14px;resize:none}
+
+/* Botões mais “vivos” */
+button{
+  width:100%;
+  margin-top:14px;
+  padding:13px 14px;
+  border:0;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:900;
+  letter-spacing:.4px;
+  color:#061017;
+  position:relative;
+  overflow:hidden;
+  transform: translateZ(0);
+  transition: transform .12s ease, filter .15s ease, box-shadow .15s ease;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25);
+}
+
+/* brilho animado passando */
+button::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+}
+
+button:hover::before{ transform: translateX(120%); }
+
+button:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+button:active{
+  transform: translateY(1px) scale(.99);
+  filter: brightness(.98);
+}
+
+#btnGerar{
+  background: linear-gradient(90deg,var(--g1),var(--g2));
+}
+
+#btnCopiar.secondary{
+  background: linear-gradient(90deg, rgba(255,61,127,.95), rgba(255,183,3,.95));
+  color:#111;
+}
+
+/* feedback de “copiado” (quando JS adiciona .ok) */
+#btnCopiar.ok{
+  background: linear-gradient(90deg, #2ee59d, #1cc7ff) !important;
+  color:#061017;
+}
+
+/* leve “shake” quando der erro (quando JS adiciona .shake) */
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+.shake{ animation: shake .35s ease; }
